@@ -7,9 +7,10 @@
                 v-on:click="item.show = !item.show"
             >
                 <h2>{{ item.name }}</h2>
-                <h3 v-show="item.show">{{ item.speciality }}</h3>
+                <p v-show="item.show">{{ item.speciality }}</p>
             </li>
         </ul>
+        <button v-on:click="resetShow">Reset All</button>
     </div>
 </template>
 
@@ -27,24 +28,31 @@ export default {
             ],
         };
     },
+    methods: {
+        resetShow() {
+            this.ninjas.forEach((ninja) => {
+                ninja.show = !ninja.show;
+            });
+        },
+    },
 };
 </script>
 
 <style scoped>
-#ninjas{
+#ninjas {
     width: 100%;
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 20px;
     box-sizing: border-box;
 }
-ul{
+ul {
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
 }
-li{
+li {
     flex-grow: 1;
     flex-basis: 300px;
     text-align: center;
