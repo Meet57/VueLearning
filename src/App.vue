@@ -2,7 +2,7 @@
     <div>
         <app-header :title="title" v-on:changeTitle="updateTitle($event)" />
         <app-ninjas :ninjas="ninjas" />
-        <app-footer  :title="title" />
+        <app-footer :title="title" />
     </div>
 </template>
 
