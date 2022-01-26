@@ -1,10 +1,7 @@
 <template>
     <div>
-        <app-header :title="title" />
+        <app-header :title="title" v-on:changeTitle="updateTitle($event)" />
         <app-ninjas :ninjas="ninjas" />
-
-        <!-- <hr>
-        <app-ninjas :ninjas="ninjas" /> -->
         <app-footer  :title="title" />
     </div>
 </template>
@@ -32,7 +29,17 @@ export default {
         "app-footer": Footer,
         "app-ninjas": Ninjas,
     },
+    methods:{
+        updateTitle(updatedTitle){
+            this.title = updatedTitle
+        }
+    }
 };
 </script>
 
-<style></style>
+<style scoped>
+div{
+    margin:0;
+    padding:0;
+}
+</style>

@@ -1,6 +1,5 @@
 <template>
     <div id="ninjas">
-        <!-- <p>{{ninjas}}</p> -->
         <ul>
             <li
                 v-for="(item, index) in ninjas"
@@ -12,7 +11,6 @@
             </li>
         </ul>
         <button v-on:click="deleteNinja">Delete ninja</button>
-        <!-- <button v-on:click="resetShow">Reset All</button> -->
     </div>
 </template>
 
@@ -30,11 +28,6 @@ export default {
         };
     },
     methods: {
-        resetShow() {
-            this.ninjas.forEach((ninja) => {
-                ninja.show = !ninja.show;
-            });
-        },
         deleteNinja(){
             this.ninjas.pop();
         }
