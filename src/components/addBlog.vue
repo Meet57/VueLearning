@@ -1,9 +1,8 @@
 <template>
     <div id="add-blog">
         <h2>Add a New Blog Post</h2>
-        <form>
+        <form v-if="!submitted">
             <label>Blog Title:</label>
-            Hello
             <input type="text" v-model.lazy="blog.title" />
             <label>Blog Content:</label>
             <textarea v-model.lazy.trim="blog.content"></textarea>
@@ -18,7 +17,15 @@
                 <label>Cheese</label>
                 <input type="checkbox" value="cheese" v-model="blog.categories" />
             </div>
+            <label>Author:</label>
+            <select v-model="blog.author">
+                <option v-for="author in authors" :key="author">{{ author }}</option>
+            </select>
+            <button v-on:click.prevent="post">Add Blog</button>
         </form>
+        <div v-if="submitted">
+            <h3>Thanks for adding your post</h3>
+        </div>
         <div id="preview">
             <h3>Preview blog</h3>
             <p>Blog title: {{ blog.title }}</p>
@@ -28,6 +35,7 @@
             <ul>
                 <li v-for="cat in blog.categories" :key="cat">{{cat}}</li>
             </ul>
+            <p>Author: {{ blog.author }}</p>
         </div>
     </div>
 </template>
@@ -39,11 +47,28 @@ export default {
             blog: {
                 title: "",
                 content: "",
-                categories: []
+                categories: [],
+                author: ''
             },
+            authors: ['The Net Ninja', 'The Angular Avenger', 'The Vue Vindicator'],
+            submitted: false,
         };
     },
-    methods: {},
+    methods: {
+        post(){
+            this.$http.post(
+                'https://jsonplaceholder.typicode.com/posts',
+                {
+                    title: this.blog.title,
+                    body: this.blog.content,
+                    userId: 1
+                }    
+            ).then((data)=>{
+                console.log(data)
+                this.submitted = true
+            })
+        }
+    },
 };
 </script>
 
