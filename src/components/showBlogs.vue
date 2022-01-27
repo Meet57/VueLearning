@@ -1,8 +1,9 @@
 <template>
     <div id="show-blogs">
         <h1>All Blogs Articles</h1>
-        <div v-for="blog in blogs" :key="blog" class="single-blog">
-            <h2>{{ blog.title }}</h2>
+        <h3 v-if="isLoading">Loading</h3>
+        <div v-else v-for="blog in blogs" :key="blog" class="single-blog">
+            <h2 v-rainbow >{{ blog.title }}</h2>
             <p>{{ blog.body }}</p>
         </div>
     </div>
@@ -13,12 +14,14 @@ export default {
     data() {
         return {
             blogs: [],
+            isLoading : true
         };
     },
     methods: {},
     created() {
         this.$http.get("https://jsonplaceholder.typicode.com/posts").then((data) => {
             this.blogs = data.body.slice(0, 10);
+            this.isLoading = false
         });
     },
 };
