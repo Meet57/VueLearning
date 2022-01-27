@@ -32,6 +32,25 @@ export default {
             this.ninjas.pop();
         }
     },
+    // lifecycle hooks
+    beforeCreate(){
+        alert('beforeCreate')
+    },
+    created(){
+        alert('Created')
+    },
+    beforeMount(){
+        alert('beforeMount')
+    },
+    mounted(){
+        alert('mounted')
+    },
+    beforeUpdate(){
+        alert('beforeUpdate')
+    },
+    updated(){
+        alert('updated')
+    }
 };
 </script>
 
