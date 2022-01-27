@@ -1,9 +1,9 @@
 <template>
-    <div id="show-blogs">
+    <div v-theme:column="theme" id="show-blogs">
         <h1>All Blogs Articles</h1>
-        <h3 v-if="isLoading">Loading</h3>
+        <h3 v-if="isLoading">Loading...</h3>
         <div v-else v-for="blog in blogs" :key="blog" class="single-blog">
-            <h2 v-rainbow >{{ blog.title }}</h2>
+            <h2 v-rainbow>{{ blog.title }}</h2>
             <p>{{ blog.body }}</p>
         </div>
     </div>
@@ -14,7 +14,8 @@ export default {
     data() {
         return {
             blogs: [],
-            isLoading : true
+            isLoading : true,
+            theme: 'narrow'
         };
     },
     methods: {},
