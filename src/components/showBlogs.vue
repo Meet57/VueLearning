@@ -2,9 +2,9 @@
     <div v-theme:column="theme" id="show-blogs">
         <h1>All Blogs Articles</h1>
         <h3 v-if="isLoading">Loading...</h3>
-        <div v-else v-for="blog in blogs" :key="blog" class="single-blog">
-            <h2 v-rainbow>{{ blog.title }}</h2>
-            <p>{{ blog.body }}</p>
+        <div v-else v-for="blog in blogs" :key="blog.title.slice(0,10)" class="single-blog">
+            <h2 v-rainbow>{{ blog.title | to-uppercase }}</h2>
+            <p>{{ blog.body | snippet }}</p>
         </div>
     </div>
 </template>
