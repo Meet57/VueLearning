@@ -1,45 +1,41 @@
 <template>
     <div>
-        <app-header :title="title" v-on:changeTitle="updateTitle($event)" />
-        <app-ninjas :ninjas="ninjas" />
-        <app-footer :title="title" />
+        <keep-alive>
+            <component v-bind:is="component" />
+        </keep-alive>
+        <button v-on:click="changeComponent(1)">Form One</button>
+        <button v-on:click="changeComponent(2)">Form Two</button>
     </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
-import Ninjas from "./components/Ninjas.vue";
+import formOne from "./components/formOne.vue";
+import formTwo from "./components/formTwo.vue";
+
 export default {
+    components: {
+        "form-one": formOne,
+        "form-two": formTwo,
+    },
     data() {
         return {
-            title: "Meet Patel",
-            ninjas: [
-                { name: "Ryu", speciality: "Vue Components", show: false },
-                { name: "Crystal", speciality: "HTML Wizardry", show: false },
-                { name: "Hitoshi", speciality: "Click Events", show: false },
-                { name: "Tango", speciality: "Conditionals", show: false },
-                { name: "Kami", speciality: "Webpack", show: false },
-                { name: "Yoshi", speciality: "Data Diggin", show: false },
-            ],
+            component: "form-two",
         };
     },
-    components: {
-        "app-header": Header,
-        "app-footer": Footer,
-        "app-ninjas": Ninjas,
+    methods: {
+        handleSubmit: function () {
+            alert("thanks for submitting");
+        },
+        changeComponent(id) {
+            this.component = id == 1 ? "form-one" : "form-two";
+        },
     },
-    methods:{
-        updateTitle(updatedTitle){
-            this.title = updatedTitle
-        }
-    }
 };
 </script>
 
-<style scoped>
-div{
-    margin:0;
-    padding:0;
+<style>
+button {
+    margin: 0 auto;
+    font-family: "Nunito SemiBold";
 }
 </style>
