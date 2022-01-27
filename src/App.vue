@@ -1,41 +1,26 @@
 <template>
     <div>
-        <keep-alive>
-            <component v-bind:is="component" />
-        </keep-alive>
-        <button v-on:click="changeComponent(1)">Form One</button>
-        <button v-on:click="changeComponent(2)">Form Two</button>
+        <add-blog />
     </div>
 </template>
 
 <script>
-import formOne from "./components/formOne.vue";
-import formTwo from "./components/formTwo.vue";
-
+import addBlog from './components/addBlog.vue';
 export default {
-    components: {
-        "form-one": formOne,
-        "form-two": formTwo,
+    components:{
+        'add-blog' : addBlog
     },
-    data() {
+    data(){
         return {
-            component: "form-two",
-        };
+            
+        }
     },
-    methods: {
-        handleSubmit: function () {
-            alert("thanks for submitting");
-        },
-        changeComponent(id) {
-            this.component = id == 1 ? "form-one" : "form-two";
-        },
-    },
+    methods:{
+
+    }
 };
 </script>
 
 <style>
-button {
-    margin: 0 auto;
-    font-family: "Nunito SemiBold";
-}
+
 </style>
