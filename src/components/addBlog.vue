@@ -3,9 +3,9 @@
         <h2>Add a New Blog Post</h2>
         <form v-if="!submitted">
             <label>Blog Title:</label>
-            <input type="text" v-model.lazy="blog.title" />
+            <input type="text" v-model.lazy="blog.title" required />
             <label>Blog Content:</label>
-            <textarea v-model.lazy="blog.content"></textarea>
+            <textarea v-model.lazy.trim="blog.content"></textarea>
             <div id="checkboxes">
                 <p>Blog Categories:</p>
                 <label>Ninjas</label>
@@ -21,6 +21,7 @@
             <select v-model="blog.author">
                 <option v-for="author in authors" :key="author">{{ author }}</option>
             </select>
+            <hr />
             <button v-on:click.prevent="post">Add Blog</button>
         </form>
         <div v-if="submitted">
@@ -33,7 +34,7 @@
             <p style="white-space: pre">{{ blog.content }}</p>
             <p>Blog Categories:</p>
             <ul>
-                <li v-for="cat in blog.categories" :key="cat">{{cat}}</li>
+                <li v-for="category in blog.categories" :key="category">{{ category }}</li>
             </ul>
             <p>Author: {{ blog.author }}</p>
         </div>
@@ -41,38 +42,37 @@
 </template>
 
 <script>
+// Imports
+
 export default {
-    data() {
+    data () {
         return {
             blog: {
-                title: "",
-                content: "",
+                title: '',
+                content: '',
                 categories: [],
                 author: ''
             },
             authors: ['The Net Ninja', 'The Angular Avenger', 'The Vue Vindicator'],
-            submitted: false,
-        };
-    },
-    methods: {
-        post(){
-            this.$http.post(
-                'https://jsonplaceholder.typicode.com/posts',
-                {
-                    title: this.blog.title,
-                    body: this.blog.content,
-                    userId: 1
-                }    
-            ).then((data)=>{
-                console.log(data)
-                this.submitted = true
-            })
+            submitted: false
         }
     },
-};
+    methods: {
+        post: function(){
+            this.$http.post('http://jsonplaceholder.typicode.com/posts', {
+                title: this.blog.title,
+                body: this.blog.content,
+                userId: 1
+            }).then(function(data){
+                console.log(data);
+                this.submitted = true;
+            });
+        }
+    }
+}
 </script>
 
-<style>
+<style scoped>
 #add-blog *{
     box-sizing: border-box;
 }
@@ -103,5 +103,6 @@ h3{
 }
 #checkboxes label{
     display: inline-block;
+    margin-top: 0;
 }
 </style>
