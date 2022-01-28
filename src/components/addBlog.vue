@@ -45,63 +45,60 @@
 // Imports
 
 export default {
-    data () {
+    data() {
         return {
             blog: {
-                title: '',
-                content: '',
+                title: "",
+                content: "",
                 categories: [],
-                author: ''
+                author: "",
             },
-            authors: ['The Net Ninja', 'The Angular Avenger', 'The Vue Vindicator'],
-            submitted: false
-        }
+            authors: ["The Net Ninja", "The Angular Avenger", "The Vue Vindicator"],
+            submitted: false,
+        };
     },
     methods: {
-        post: function(){
-            this.$http.post('http://jsonplaceholder.typicode.com/posts', {
-                title: this.blog.title,
-                body: this.blog.content,
-                userId: 1
-            }).then(function(data){
+        post: function () {
+            this.$http.post("https://vue-blog-34e4c-default-rtdb.firebaseio.com/posts.json", this.blog).then(function (data) {
                 console.log(data);
                 this.submitted = true;
             });
         }
     }
-}
+};
 </script>
 
 <style scoped>
-#add-blog *{
+#add-blog * {
     box-sizing: border-box;
 }
-#add-blog{
+#add-blog {
     margin: 20px auto;
     max-width: 500px;
 }
-label{
+label {
     display: block;
     margin: 20px 0 10px;
 }
-input[type="text"], textarea{
+input[type="text"],
+textarea {
     display: block;
     width: 100%;
     padding: 8px;
 }
-#preview{
+#preview {
     padding: 10px 20px;
     border: 1px dotted #ccc;
     margin: 30px 0;
 }
-h3{
+h3 {
     margin-top: 10px;
 }
-#checkboxes input{
+#checkboxes input {
     display: inline-block;
     margin-right: 10px;
 }
-#checkboxes label{
+#checkboxes label {
     display: inline-block;
     margin-top: 0;
 }

@@ -2,7 +2,7 @@
     <div id="show-blogs">
         <h1>List Blog Titles</h1>
         <input type="text" v-model="search" placeholder="search blogs" />
-        <div v-for="blog in filteredBlogs" class="single-blog">
+        <div v-for="blog in filteredBlogs" :key="blog.id" class="single-blog">
             <h2>{{ blog.title }}</h2>
         </div>
     </div>
